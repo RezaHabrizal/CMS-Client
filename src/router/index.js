@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
   const currentUser = localStorage.access_token
 
   if (!currentUser && to.name === 'Products') {
-    next('/')
+    next({ name: 'Login' })
   } else {
     next()
   }

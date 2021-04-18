@@ -46,7 +46,7 @@ export default {
     login () {
       this.$store.dispatch('goLogin', { email: this.email, password: this.password })
       this.$nextTick(() => {
-        this.$router.push('/products')
+        this.$router.push({ name: 'Products' })
       })
     }
   }

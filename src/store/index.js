@@ -12,7 +12,8 @@ export default new Vuex.Store({
       imageUrl: '',
       price: 0,
       stock: 0
-    }
+    },
+    baner: ''
   },
   mutations: {
     setProducts (state, payload) {
@@ -30,7 +31,10 @@ export default new Vuex.Store({
     },
     goLogOut (state) {
       localStorage.clear()
-      this.$router.push('/').catch(() => {})
+      this.$router.push({ name: 'Login' }).catch(() => {})
+    },
+    setBaner (state, payload) {
+      state.baner = payload.imageUrl
     }
   },
   actions: {
@@ -77,7 +81,7 @@ export default new Vuex.Store({
     goDelete (context, payload) {
       axios.delete(`/products/${payload.id}`)
         .then((response) => {
-          this.getProducts()
+          console.log(response)
         })
         .catch(err => {
           console.log(err)
@@ -94,7 +98,6 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          // console.log(data, '<<<<<< dataADD')
           context.commit('addProduct', data)
         })
         .catch(err => {
@@ -103,6 +106,30 @@ export default new Vuex.Store({
     },
     goLogOut (context) {
       context.commit('goLogOut')
+    },
+    addBaner (context, payload) {
+      axios.post('/baner', {
+        data: {
+          imageUrl: payload.imageUrl
+        }
+      })
+        .then(({ data }) => {
+          console.log(data)
+          // context.commit('addBaner', data)
+        })
+        .catch(err => {
+          console.log(err, '<<ERROR')
+        })
+    },
+    getBaner (context) {
+      axios.get('/baner')
+        .then(({ data }) => {
+          console.log(data)
+          context.commit('setBaner', data)
+        })
+        .catch(err => {
+          console.log(err, '<<ERROR')
+        })
     }
   },
   modules: {

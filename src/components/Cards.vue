@@ -26,8 +26,8 @@
                   <input type="text" v-model="product.name" required>
                   <div>ImageUrl:</div>
                   <input type="text" v-model="product.imageUrl" required>
-                  <div>Price:</div>
-                  <input type="number" v-model="product.price" required>
+                  <div>Price: (please input number only without any else)</div>
+                  <input type="text" v-model="product.price" required>
                   <div>Stock:</div>
                   <input type="number" v-model="product.stock" required>
                   <div>
@@ -55,6 +55,9 @@ export default {
     },
     goDelete (id) {
       this.$store.dispatch('goDelete', { id })
+      this.$nextTick(() => {
+        this.$store.dispatch('getProducts')
+      })
     }
   }
 }

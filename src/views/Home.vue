@@ -17,9 +17,17 @@
           </b-navbar-nav>
         </b-navbar>
       </div>
-  <div class="conainer-banner" style="height: 30vh">
+  <div class="container-banner" style="height: 30vh">
+    <div  style="text-align: center;">
+      <b-button v-b-modal="'my-modal'"><b-badge variant="light">Add Banner</b-badge></b-button>
+      <b-modal id="my-modal">
+        <form @submit.prevent="addBaner">
+          <div>imageUrl:</div><input type="text" v-model="imageUrl"><button type="submit">Submit</button>
+        </form>
+      </b-modal>
+    </div>
     <div class="d-flex justify-content-center" style="height: 100%; padding: 20px;">
-      <img src=""> BANNER
+      <img :src="baner">
     </div>
   </div>
   <div class="d-flex justify-content-center">
@@ -48,18 +56,28 @@ export default {
   components: {
     Cards
   },
+  data () {
+    return {
+      imageUrl: ''
+    }
+  },
   methods: {
     doLogOut () {
       this.$store.dispatch('goLogOut')
+    },
+    addBaner () {
+      this.$store.dispatch('addBaner', { imageUrl: this.imageUrl })
     }
   },
   computed: {
     ...mapState({
-      products: 'products'
+      products: 'products',
+      baner: 'baner'
     })
   },
   created () {
     this.$store.dispatch('getProducts')
+    this.$store.dispatch('getBaner')
   }
 }
 </script>
