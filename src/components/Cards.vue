@@ -12,9 +12,10 @@
       <b-card-text>
         {{ product.price }}
       </b-card-text>
+      <b-col lg="4" class="pb-2"><b-button size="sm" @click.prevent="goDelete(product.id)">Delete</b-button></b-col>
       <div class="row">
         <div class="col-md">
-        <b-button v-b-toggle="'sidebar-variant' + product.id">Edit Product</b-button>
+          <b-col lg="4" class="pb-2"><b-button v-b-toggle="'sidebar-variant' + product.id">Edit Product</b-button></b-col>
             <b-sidebar :id="'sidebar-variant'+ product.id" title="Edit Product" bg-variant="dark" text-variant="light" shadow>
               <div class="px-3 py-2">
                 <div class="container">
@@ -28,7 +29,7 @@
                   <div>Stock:</div>
                   <input type="number" v-model="product.stock" required>
                   <div>
-                  <button type="submit" @click="goEdit">Edit</button>
+                  <button type="submit" @click.prevent="goEdit">Edit</button>
                   </div>
                 </form>
                 </div>

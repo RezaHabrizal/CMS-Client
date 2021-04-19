@@ -67,7 +67,7 @@ export default new Vuex.Store({
     goDelete (context, payload) {
       axios.delete(`/products/${payload.id}`)
         .then((response) => {
-          console.log(response)
+          console.log(response.data)
         })
         .catch(err => {
           console.log(err)

@@ -70,6 +70,12 @@ export default {
     },
     addBaner () {
       this.$store.dispatch('addBaner', { imageUrl: this.imageUrl })
+    },
+    goDelete (id) {
+      this.$store.dispatch('goDelete', { id })
+      this.$nextTick(() => {
+        this.$store.dispatch('getProducts')
+      })
     }
   },
   computed: {
