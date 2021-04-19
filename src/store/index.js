@@ -7,12 +7,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    addProductValue: {
-      name: '',
-      imageUrl: '',
-      price: 0,
-      stock: 0
-    },
     baner: ''
   },
   mutations: {
@@ -28,10 +22,6 @@ export default new Vuex.Store({
           e = payload
         }
       })
-    },
-    goLogOut (state) {
-      localStorage.clear()
-      this.$router.push({ name: 'Login' }).catch(() => {})
     },
     setBaner (state, payload) {
       state.baner = payload.imageUrl
@@ -49,26 +39,22 @@ export default new Vuex.Store({
     },
     goLogin (context, payload) {
       axios.post('/login', {
-        data: {
-          email: payload.email,
-          password: payload.password
-        }
+        email: payload.email,
+        password: payload.password
       })
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
         })
         .catch(err => {
-          console.log(err)
+          console.log(err, 'err login')
         })
     },
     goEdit (context, payload) {
       axios.put(`/products/${payload.id}`, {
-        data: {
-          name: payload.name,
-          imageUrl: payload.imageUrl,
-          price: payload.price,
-          stock: payload.stock
-        }
+        name: payload.name,
+        imageUrl: payload.imageUrl,
+        price: payload.price,
+        stock: payload.stock
       })
         .then(response => {
           // console.log(response.data.updated.price, '<<<<<<<<<<<<<<')
@@ -90,12 +76,10 @@ export default new Vuex.Store({
     goAddProduct (context, payload) {
       // console.log(payload.imageUrl, '<<<<<<<<payload addproduct')
       axios.post('/products', {
-        data: {
-          name: payload.name,
-          imageUrl: payload.imageUrl,
-          price: payload.price,
-          stock: payload.stock
-        }
+        name: payload.name,
+        imageUrl: payload.imageUrl,
+        price: payload.price,
+        stock: payload.stock
       })
         .then(({ data }) => {
           context.commit('addProduct', data)
@@ -104,14 +88,9 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    goLogOut (context) {
-      context.commit('goLogOut')
-    },
     addBaner (context, payload) {
       axios.post('/baner', {
-        data: {
-          imageUrl: payload.imageUrl
-        }
+        imageUrl: payload.imageUrl
       })
         .then(({ data }) => {
           console.log(data)

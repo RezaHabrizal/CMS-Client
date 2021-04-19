@@ -37,18 +37,23 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+
 export default {
-  computed: {
-    ...mapState({
-      addProductValue: 'addProductValue'
-    })
+  data () {
+    return {
+      addProductValue: {
+        name: '',
+        imageUrl: '',
+        price: 0,
+        stock: 0
+      }
+    }
   },
   methods: {
     goAdd () {
       this.$store.dispatch('goAddProduct', this.addProductValue)
       this.$nextTick(() => {
-        this.$router.push('/products').catch(() => {})
+        this.$router.push('/').catch(() => {})
       })
     }
   }

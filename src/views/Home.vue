@@ -63,7 +63,10 @@ export default {
   },
   methods: {
     doLogOut () {
-      this.$store.dispatch('goLogOut')
+      localStorage.removeItem('access_token')
+      this.$nextTick(() => {
+        this.$router.push('/login').catch(() => {})
+      })
     },
     addBaner () {
       this.$store.dispatch('addBaner', { imageUrl: this.imageUrl })
@@ -77,7 +80,6 @@ export default {
   },
   created () {
     this.$store.dispatch('getProducts')
-    this.$store.dispatch('getBaner')
   }
 }
 </script>

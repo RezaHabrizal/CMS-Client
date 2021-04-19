@@ -5,16 +5,7 @@
 </template>
 
 <script>
-
-export default {
-  created () {
-    if (localStorage.access_token) {
-      this.isLogin = true
-    } else {
-      this.isLogin = false
-    }
-  }
-}
+export default {}
 </script>
 <style>
 </style>

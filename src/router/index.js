@@ -9,13 +9,13 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Login',
-    component: Login
+    name: 'Home',
+    component: Home
   },
   {
-    path: '/products',
-    name: 'Products',
-    component: Home
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/add-products',
@@ -32,9 +32,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const currentUser = localStorage.access_token
-
-  if (!currentUser && to.name === 'Products') {
+  const forbiden = ['Home', 'addProducts']
+  if (!currentUser && forbiden.includes(to.name)) {
     next({ name: 'Login' })
+  } else if (currentUser && to.name === 'Login') {
+    next({ name: 'Home' })
   } else {
     next()
   }

@@ -15,9 +15,6 @@
       <div class="row">
         <div class="col-md">
         <b-button v-b-toggle="'sidebar-variant' + product.id">Edit Product</b-button>
-        </div>
-            <b-button variant="danger" @click.prevent="goDelete(product.id)">Delete</b-button>
-          <div>
             <b-sidebar :id="'sidebar-variant'+ product.id" title="Edit Product" bg-variant="dark" text-variant="light" shadow>
               <div class="px-3 py-2">
                 <div class="container">
@@ -31,7 +28,7 @@
                   <div>Stock:</div>
                   <input type="number" v-model="product.stock" required>
                   <div>
-                  <button type="submit">Edit</button>
+                  <button type="submit" @click="goEdit">Edit</button>
                   </div>
                 </form>
                 </div>
